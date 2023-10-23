@@ -25,12 +25,12 @@ export class CandidatesService {
     if (candidate) {
       return of(candidate);
     }
-    const errorResponse = {
+    const cause = {
       status: 404,
       error: new Error('Recurso no encontrado'),
       message: 'Recurso no encontrado',
     };
-    return throwError(() => errorResponse);
+    throw new Error('Recurso no encontrado', { cause });
   }
 
   save(candidate: Candidate): Observable<Candidate> {
@@ -57,12 +57,12 @@ export class CandidatesService {
         return of(this.candidates[index]);
       }
     }
-    const errorResponse = {
+    const cause = {
       status: 404,
       error: new Error('Recurso no encontrado'),
       message: 'Recurso no encontrado',
     };
-    return throwError(() => errorResponse);
+    throw new Error('Recurso no encontrado', { cause });
   }
 
   remove(id: string | number) {
@@ -75,12 +75,12 @@ export class CandidatesService {
         message: 'Recurso borrado',
       });
     }
-    const errorResponse = {
+    const cause = {
       status: 404,
       error: new Error('Recurso no encontrado'),
       message: 'Recurso no encontrado',
     };
-    return throwError(() => errorResponse);
+    throw new Error('Recurso no encontrado', { cause });
   }
 
   private notify() {
