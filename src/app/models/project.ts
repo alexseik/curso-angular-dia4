@@ -1,5 +1,6 @@
 export interface Project {
   name: string;
-  technology: string;
-  experience: string;
+  technology: string[];
+  description: string;
+  experience: number;
 }

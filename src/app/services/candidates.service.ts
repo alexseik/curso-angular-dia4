@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@angular/core';
+import { Inject, Injectable, Optional } from '@angular/core';
 import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { Candidate } from '../models/candidate';
 import { APP_CONFIG, AppConfig } from '../config/app.config';
@@ -11,8 +11,9 @@ export class CandidatesService {
 
   private subject: BehaviorSubject<Candidate[]>;
 
-  constructor(@Inject(APP_CONFIG) config: AppConfig) {
-    this.candidates = Array.isArray(config.candidates) ? config.candidates : [];
+  constructor(@Optional() @Inject(APP_CONFIG) config: AppConfig) {
+    this.candidates =
+      config && Array.isArray(config.candidates) ? config.candidates : [];
     this.subject = new BehaviorSubject(this.candidates);
   }
 
