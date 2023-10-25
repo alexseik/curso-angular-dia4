@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CandidateFormComponent } from './candidate-form.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('CandidateFormComponent', () => {
   let component: CandidateFormComponent;
@@ -8,7 +9,8 @@ describe('CandidateFormComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [CandidateFormComponent]
+      declarations: [CandidateFormComponent],
+      schemas: [NO_ERRORS_SCHEMA],
     });
     fixture = TestBed.createComponent(CandidateFormComponent);
     component = fixture.componentInstance;
