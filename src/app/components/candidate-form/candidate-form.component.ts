@@ -2,6 +2,8 @@ import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
+  Input,
+  OnInit,
   Output,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -14,8 +16,10 @@ import { linkedinPattern, phonePattern } from 'src/app/utils/Validators';
   styleUrls: ['./candidate-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CandidateFormComponent {
+export class CandidateFormComponent implements OnInit {
   candidateForm: FormGroup;
+
+  @Input() candidate: Candidate | null = null;
 
   @Output() submit = new EventEmitter<Candidate>();
   @Output() back = new EventEmitter();
@@ -26,9 +30,13 @@ export class CandidateFormComponent {
       surname: ['', [Validators.required, Validators.minLength(2)]],
       email: ['', [Validators.required, Validators.email]],
       phone: ['', [Validators.pattern(phonePattern)]],
-      linkedin: ['', [Validators.pattern(linkedinPattern)]],
+      linkedIn: ['', [Validators.pattern(linkedinPattern)]],
       experience: ['', [Validators.required]],
     });
+  }
+
+  ngOnInit(): void {
+    this.reset();
   }
 
   get name() {
@@ -80,12 +88,12 @@ export class CandidateFormComponent {
       : '';
   }
 
-  get linkedin() {
-    return this.candidateForm.get('linkedin');
+  get linkedIn() {
+    return this.candidateForm.get('linkedIn');
   }
 
   getLinkedinErrors() {
-    return this.linkedin?.hasError('pattern')
+    return this.linkedIn?.hasError('pattern')
       ? 'Debe introducir un perfil de linkedin correcto'
       : '';
   }
@@ -103,6 +111,7 @@ export class CandidateFormComponent {
   onSubmit() {
     const savedCandidate: Candidate = Object.assign(
       {},
+      this.candidate,
       this.candidateForm.value
     );
     this.submit.emit(savedCandidate);
@@ -114,5 +123,15 @@ export class CandidateFormComponent {
 
   reset() {
     this.candidateForm.reset();
+    if (this.candidate) {
+      this.candidateForm.setValue({
+        name: this.candidate.name,
+        surname: this.candidate.surname,
+        email: this.candidate.email,
+        phone: this.candidate.phone ? this.candidate.phone : null,
+        linkedIn: this.candidate.linkedIn ? this.candidate.linkedIn : null,
+        experience: this.candidate.experience,
+      });
+    }
   }
 }
