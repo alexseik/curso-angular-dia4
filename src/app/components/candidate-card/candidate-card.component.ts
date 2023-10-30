@@ -1,5 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationModalComponent } from 'src/app/confirmation-modal/confirmation-modal.component';
 import { Candidate } from 'src/app/models/candidate';
+import { CandidatesService } from 'src/app/services/candidates.service';
 
 @Component({
   selector: 'app-candidate-card',
@@ -16,6 +19,11 @@ export class CandidateCardComponent implements OnInit {
     mid: false,
     senior: false,
   };
+
+  constructor(
+    public dialog: MatDialog,
+    private candidateService: CandidatesService
+  ) {}
 
   ngOnInit(): void {
     this.seniority.junior = this.candidate?.experience === 'Junior';
@@ -50,5 +58,18 @@ export class CandidateCardComponent implements OnInit {
         .flat()
         .filter(onlyUnique);
     }
+  }
+
+  remove(): void {
+    const dialogRef = this.dialog.open(ConfirmationModalComponent, {
+      data: this.candidate,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed');
+      if (result) {
+        this.candidateService.remove(result.id);
+      }
+    });
   }
 }
