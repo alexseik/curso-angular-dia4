@@ -25,6 +25,7 @@ export const Config: AppConfig = {
         },
       ],
       surname: 'Ruiz Marco',
+      skills: [],
     },
     {
       id: 1,
@@ -48,6 +49,7 @@ export const Config: AppConfig = {
         },
       ],
       surname: 'Martínez',
+      skills: [],
     },
     {
       id: 2,
@@ -77,6 +79,7 @@ export const Config: AppConfig = {
         },
       ],
       surname: 'García Olano',
+      skills: ['JS', 'Proactivo'],
     },
   ],
 };

@@ -26,8 +26,14 @@
   <mat-card-content class="candidate-card__content">
     <div class="candidate-skills">
       <div *ngFor="let skill of skills" class="skill">
-        <span class="skill__technology">{{ skill.technology }}</span>
+        <span class="skill__name">{{ skill.technology }}</span>
         <span class="skill__experience">{{ skill.experience }}</span>
+      </div>
+    </div>
+    <h3 class="other-skills-title">Otras skills</h3>
+    <div class="candidate-skills">
+      <div *ngFor="let otherSkill of candidate.skills" class="skill">
+        <span class="skill__name">{{ otherSkill }}</span>
       </div>
     </div>
     <div class="candidate-positions">
