@@ -17,12 +17,14 @@
       getSurnameErrors()
     }}</mat-error>
   </mat-form-field>
-  <mat-form-field class="half">
+  <mat-form-field class="half" class="email-field">
     <mat-label>Email</mat-label>
     <input matInput type="email" formControlName="email" />
-    <mat-error *ngIf="candidateForm.dirty && email?.invalid">{{
-      getEmailErrors()
-    }}</mat-error>
+    <mat-error
+      data-testid="candidate-email-field-error"
+      *ngIf="candidateForm.dirty && email?.invalid"
+      >{{ getEmailErrors() }}</mat-error
+    >
   </mat-form-field>
   <mat-form-field class="quarter">
     <mat-label>Teléfono</mat-label>
@@ -40,7 +42,7 @@
   </mat-form-field>
   <mat-form-field class="quarter">
     <mat-label>Nivel</mat-label>
-    <mat-select formControlName="experience">
+    <mat-select ngDefaultControl formControlName="experience">
       <mat-option value="Junior">Junior</mat-option>
       <mat-option value="Midlevel">Intermedio</mat-option>
       <mat-option value="Senior">Senior</mat-option>
@@ -51,7 +53,9 @@
   </mat-form-field>
   <div class="full" formArrayName="skills">
     <h2>Skills</h2>
-    <button type="button" (click)="addSkill()">+ Add another skill</button>
+    <button mat-button type="button" (click)="addSkill()">
+      + Add another skill
+    </button>
 
     <div class="skills">
       <mat-form-field *ngFor="let skill of skills.controls; let i = index">

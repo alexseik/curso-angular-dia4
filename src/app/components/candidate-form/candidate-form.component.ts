@@ -144,8 +144,8 @@ export class CandidateFormComponent implements OnInit {
         name: this.candidate.name,
         surname: this.candidate.surname,
         email: this.candidate.email,
-        phone: this.candidate.phone ? this.candidate.phone : null,
-        linkedIn: this.candidate.linkedIn ? this.candidate.linkedIn : null,
+        phone: this.candidate.phone ? this.candidate.phone : '',
+        linkedIn: this.candidate.linkedIn ? this.candidate.linkedIn : '',
         experience: this.candidate.experience,
         skills,
       });
