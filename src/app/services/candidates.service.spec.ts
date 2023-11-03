@@ -17,6 +17,7 @@ describe('CandidatesService', () => {
       surname: 'Apellido 1',
       email: 'email@email.com',
       experience: Experience.Junior,
+      skills: [],
       previousProjects: [],
       age: 25,
     },
@@ -64,6 +65,7 @@ describe('CandidatesService', () => {
       surname: 'Apellido 2',
       email: 'email@email.com',
       experience: Experience.Senior,
+      skills: [],
       previousProjects: [],
       age: 52,
     };
